@@ -1,0 +1,17 @@
+version: '3'
+services:
+  remuse-app:
+    container_name: remuse-app
+    image: remuse
+    restart: always
+    build: .
+    ports:
+      - '5000:5000'
+    links:
+      - mongo
+
+  mongo:
+    container_name: mongo-container
+    image: mongo
+    ports:
+      - '27017:27017'

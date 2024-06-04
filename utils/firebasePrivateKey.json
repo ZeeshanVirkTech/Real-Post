@@ -1,0 +1,14 @@
+
+  {
+    "type": "service_account",
+    "project_id": "remuseapp",
+    "private_key_id": "043d9db3c5538444636e0d0ee0410cfe890f9a35",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC/y34O7QvZrYuA\nSgn3AMtXbftwwzrtF0Y6kh3PyyRUZi+ck3YJSyTfoyUtbxQVu4oyvsFwKaX08mFE\n9hFXGiEbC1FU8kp9onNBbXpKNAbOieeo4yCPhlfBWE5eC+Sac/8wpoU0lk9KCmwi\nFC6C95utFdW2JLCCZ2bReA2ag4G4V13f9RIG2H/Cczcm3zt99ZOLu9ZLJuyuQDp6\nfrzGTZxtpib5REmyMjk0oxyuFk2QIzUz5hd2PKCzyqn/BO9utS8xeDVo12kMGuJZ\nrJtWwE+32oUQhJlZFVUi/zjWUVJCelB4HIrL8LL+AcR1ym26F6RApUK+rSw/J3lx\nW9m2y/+7AgMBAAECggEALvY1rJPwVeF/ie8XF4rzPzon2gmDsTAEuyyx7gJQp/XJ\nbK5StZ3Xroa1ALX1FgkwopJArSUVhK+gj5Es18YHGycfSAx3nuGbFQcobWjlzcbI\nmXrbqyj67dWggrioxgTnFFOBxEmVqox4w7NrXBgi3zO8e3fqXFPTQjECK7ZNmgQl\nbadUi9jMnsYB94vC+75lM7v8gXO3apBicaRELmb6I5JxFPqxG0jUoMLS3lpCaK2t\nGVg0oN3XyfYHE+Ju7VdRMjcgzSDsiO5wClSgTHa1fccaJLM+GAcfFVyUPJsUMdOV\nAxpBcAcEj9OIWQcHQOX675tWWlaJ9oawkXd5WJ9cwQKBgQDz7FPapthoLcxVIBQX\nwbcS2pJ67k9yhsOT/gIttlBXW/dKMvOp3mAEmLzSpSnE6NOaQebsgLtB2SNkGXzw\nrRyngRRVoqKDkPPsxhJA3JgRbfSCFZ2H474r9blKaGPI2+/J7xrOctoAQYwo18Pm\neF9wK8Y7vGAEa/Dg//ShOGpSIQKBgQDJSnNZDJuYiWUYqD5cVDlBRrgeIKWgLprt\n5GDFc7W6MDEwaQZMGxGe4RzvQjnANBBrHhIGXIHax/29CTnoVGidO7QmaR/cDhjT\nQ9vIfROVsCoh/wMqOrF8WUsTHmFoVMnxG2+1QqKlSkgC0z06KAgA8T5VAlGuc9nX\nqatT3iMOWwKBgAkp0aSfK/YN8mUoRVj3IAeHSoVvunBU+7ftjOtms/H0NIAHFfxF\nrFm/2ygWqFELZhefbitoUqCQpbG2+2iXOEJaqQbmizBiG6fDcSAaqWPOO6c/ZKGc\nPqKsIn/XGBiNmp59awZibiogTEGkiWl5ECzImDPaSckgvPXW57u+wM/BAoGAE9jx\ncrBZjzrM6xd7vqLXWmZctSvG6PpvcFF6cT2th4RE9V8Fre9lV2Me9UB0bU006Tr3\n0ATDEQ1zKXaFbTEVd5txcfAfohUJwZsJSsV6buIF5YA9kaZj5bzwOBxgwmbJ2qo3\n44mEfAPNAepOOTPFRkKDQOKPp0HpEui56fUXQ80CgYEAku3gJ6wvmMe9hfnSqnCy\nKMlUfG//UdaXLEGg/T0gNIPHzmPLNy1NzCgNjXNTvEOF7sHIA1OW+cCvwijCKWfN\n7ylV8Hht1ZaCufEykPsRFMjxhLXqVpV4PqMZHtCStgQoU7G0YEIa6wJlJngoqF9C\ndrtiQ8S2VZm2paS55ZeXYCE=\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-3ryg3@remuseapp.iam.gserviceaccount.com",
+    "client_id": "104497411273952350007",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-3ryg3%40remuseapp.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }

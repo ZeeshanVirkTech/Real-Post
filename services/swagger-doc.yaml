@@ -1,0 +1,1335 @@
+
+# --------------------- User Docs --------------------------
+    #Signup
+    /api/users/signup:
+     post:
+      tags:
+        - User Controllers
+      summary: Create a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+                - password
+              properties:
+                username:
+                  type: string
+                  default: johndoe
+                email:
+                  type: string
+                  default: johndoe@gmail.com
+                password:
+                  type: string
+                  default: johnDoe20
+      responses:
+        201:
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    default: User created successfully
+        409:
+          description: Username already exists / user with this email already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    default: Username already exists / user with this email already exists
+        500:
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    default: Something went wrong
+    #login
+    /api/users/login:
+     post:
+      tags:
+        - User Controllers
+      summary: Login existing user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  default: johndoe@gmail.com
+                password:
+                  type: string
+                  default: johnDoe20
+      responses:
+        201:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - token
+                  - username
+                  - email
+                  - userId
+                  - message
+                properties:
+                  token:
+                    type: string
+                    default: eyj......
+                  username:
+                    type: string
+                    default: huzaifaaa
+                  email:
+                    type: string
+                    default: huzaifaaa@gmail.com
+                  userId:
+                    type: string
+                    default: ........
+                  message:
+                    type: string
+                    default: Login success, welcome
+        400:
+          description: No such user exists / password is wrong
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    default: No such user exists / password is wrong
+        500:
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    default: Something went wrong
+    #Edit user
+    /api/users/edit/{userid}:
+      patch:
+        parameters:
+        - in: path
+          name: userid
+          required: true
+          type: string
+          minimum: 1
+          description: user's id
+        tags:
+        - User Controllers
+        summary: Edit user credentials (username, email)
+        requestBody:
+         required: true
+         content:
+           application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+              properties:
+                username:
+                  type: string
+                  default: huzaifa
+                email:
+                  type: string
+                  default: huzaifa@gmail.com
+        responses:
+         201:
+          description: Successfully updated your info
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  username:
+                    type: string
+                    default: huzaifa
+                  email:
+                    type: string
+                    default: huzaifa@gmail.com
+                  message:
+                    type: string
+                    default: Successfully updated your info
+         400:
+          description: No such user exists
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    default: No such user exists
+         403:
+          description: Unauthorized user access
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    default: Unauthorized user access
+         500:
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    default: Something went wrong
+    #update password
+    /api/users/password/edit:
+     patch:
+      tags:
+        - User Controllers
+      summary: Set new password after OTP is verified
+      requestBody:
+        required: true
+        description: This API should only be accessible after OTP has been verified.
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - password
+                - userId
+              properties:
+                password:
+                  type: string
+                  default: password
+                userId:
+                  type: string
+                  default: this is user's id
+      responses:
+        201:
+          description: Password updated successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    default: Password updated successfully!
+        400:
+          description: No such user exists
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    default: No such user exists
+        500:
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    default: Something went wrong
+
+    # Upload profile picture
+    /api/users/upload/pfp:
+     post:
+      tags:
+      - User Controllers
+      summary: Upload profile picture
+      requestBody:
+         required: true
+         content:
+           multipart/form-data:
+             schema:
+               type : object
+               required:
+                - image
+               properties:
+                 image:
+                   type: string
+                   format: binary
+                   maximum: 1
+      responses:
+        201:
+         content:
+           application/json:
+             schema:
+               type: object
+               required:
+                - imageUrl
+               properties:
+                 message:
+                   type: string
+                   default: url of profile picture updated
+        400:
+          description: No such user exists
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    default: No such user exists
+        500:
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    default: Something went wrong
+
+    # Get user's notifications
+    /api/users/notifications/get:
+      get:
+          tags:
+          - User Controllers
+          summary: Get all notifications related to logged in user
+          responses:
+           200:
+             content:
+               application/json:
+                  schema:
+                   type: object
+                   required:
+                    - notifications
+                   properties:   
+                     notifications:         
+                       type: array
+                       items:
+                        type: object
+                        required:
+                         - _id
+                         - title
+                         - body
+                        properties:
+                         _id:
+                           type: string
+                           default: iddddd
+                         title:
+                           type :  string
+                           default : Title
+                         body:
+                           type: string
+                           default: Body
+           400:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: No such user exists
+           500:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: Something went wrong / Jwt token error
+
+  
+    # Delete notification
+    /api/users/notifications/delete:
+     delete:
+        tags:
+        - User Controllers
+        summary: Delete the post from database  
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                 - notificationId
+                properties:
+                  notificationId:
+                    type: string
+                    default : notificationId 
+        responses:
+         201:
+           content:
+             application/json:
+                schema:
+                 type: object
+                 required:
+                  - message
+                 properties:   
+                   message:         
+                     type: object
+                     default : Notification deleted successfully!
+         400:
+             description:
+             content:
+                 application/json:
+                   schema:
+                      type: object
+                      required:
+                        - message
+                      properties:
+                        message:
+                          type: string
+                          default: No such notification exists / no such user exists
+         500:
+             description:
+             content:
+                 application/json:
+                   schema:
+                      type: object
+                      required:
+                        - message
+                      properties:
+                        message:
+                          type: string
+                          default: Something went wrong / jwt error 
+
+  
+# --------------------- OTP Docs --------------------------
+
+    /api/otp/send:
+        post:
+          tags:
+          - Reset password Controllers
+          summary: Send otp to email for password reset
+          requestBody:
+            required: true
+            content:
+              application/json:
+                 schema:
+                   type: object
+                   required:
+                     - email
+                   properties:
+                      email:
+                        type: string
+                        default: johndoe@gmail.com
+          responses:
+             201:
+               description : 
+               content:
+                 application/json:
+                   schema:
+                     type: object
+                     required:
+                      - message
+                     properties:
+                       message:
+                         type : string
+                         default: email sent sucessfully
+             400:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: No such user exists
+             500:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: Something went wrong
+
+    /api/otp/verify:
+        post:
+          tags:
+          - Reset password Controllers
+          summary: Verify otp for password reset
+          requestBody:
+            required: true
+            content:
+              application/json:
+                 schema:
+                   type: object
+                   required:
+                     - sentOtp
+                     - email
+                   properties:
+                      sentOtp:
+                        type: string
+                        default: this is otp
+                      email:
+                        type: string
+                        default: johndoe@gmail.com
+          responses:
+             201:
+               description : 
+               content:
+                 application/json:
+                   schema:
+                     type: object
+                     required:
+                      - message
+                     properties:
+                       message:
+                         type : string
+                         default: otp verified , taking you to password change screen
+                       id:
+                         type: string
+                         default: this is user's id
+             400:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: Incorrect OTP / No such user exists
+             500:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: Something went wrong        
+
+# ------------------ PERSONA DOCS ---------------------------------
+
+    # Generate
+    /api/persona/generate:
+       post:
+          tags:
+          - Persona Controllers
+          summary: Generate personas based upon input
+          requestBody:
+           required: true
+           content:
+             application/json:
+                schema:
+                 type: object
+                 required:
+                   - name
+                   - cities
+                   - usp
+                   - idealTraits
+                 properties:
+                   name:
+                     type: string
+                     default: john & sarah
+                   cities:
+                     type: string
+                     default: chigago, new york
+                   usp:
+                     type: string
+                     default : experienced in finding good houses
+                   idealTraits:
+                     type: string
+                     default : Homebuyer , Property dealer
+          responses:
+           201:
+             description: A named array "personas" ; [] will contain three objects like the object shown in below example
+             content:
+               application/json:
+                  schema:
+                   type: object
+                   required:
+                    - personas
+                   properties:   
+                    personas:         
+                     type: array
+                     items:
+                       type: object
+                       required:
+                        - heading
+                        - name
+                        - backgroud
+                        - housing_needs
+                        - other_requirements
+                       properties:
+                         heading:
+                           type :  string
+                           default : some heading
+                         name:
+                           type: string
+                           default: name
+                         background:
+                           type: string
+                           default: background
+                         housing_needs:
+                           type: string
+                           default: housing needs
+                         other_requirements:
+                           type: string
+                           default: other requirements
+                         creator:
+                           type: string
+                           default : userid comes here
+           400:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: No such user exists / custom feild validation error
+           500:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: Something went wrong, sometimes appended with generating data
+
+    # Edit
+    /api/persona/edit/{personaid}:
+     patch:
+          parameters:
+            - in: path
+              name: personaid
+              required: true
+              type: string
+              minimum: 1
+              description: id of persona to edit
+          tags:
+          - Persona Controllers
+          summary: edit persona 
+          requestBody:
+           required: true
+           content:
+             application/json:
+                schema:
+                 type: object
+                 required:
+                   - name
+                   - background
+                   - housing_needs
+                   - other_requirements
+                 properties:
+                   name:
+                     type: string
+                     default: john & sarah
+                   background:
+                     type: string
+                     default: couples looking for a house
+                   housing_needs:
+                     type: string
+                     default : big house with good play area
+                   other_requirements:
+                     type: string
+                     default: Property dealer
+          responses:
+           201:
+             content:
+               application/json:
+                  schema:
+                   type: object
+                   required:
+                    - persona
+                   properties:   
+                     persona:         
+                       type: object
+                       required:
+                        - heading
+                        - name
+                        - backgroud
+                        - housing_needs
+                        - other_requirements
+                       properties:
+                         heading:
+                           type :  string
+                           default : some heading
+                         name:
+                           type: string
+                           default: name
+                         background:
+                           type: string
+                           default: background
+                         housing_needs:
+                           type: string
+                           default: housing needs
+                         other_requirements:
+                           type: string
+                           default: other requirements
+                         creator:
+                           type: string
+                           default : userid comes here
+                         id:
+                           type: string
+                           default: iddd
+           400:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: No persona found / custom feild validation error
+           403:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: unauthorzied user access
+           500:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: Something went wrong
+
+    # Get user's personas
+    /api/persona:
+      get:
+          tags:
+          - Persona Controllers
+          summary: Get all personas related to logged in user
+          responses:
+           200:
+             content:
+               application/json:
+                  schema:
+                   type: object
+                   required:
+                    - personas
+                   properties:   
+                     personas:         
+                       type: array
+                       items:
+                        type: object
+                        required:
+                         - id
+                         - heading
+                         - name
+                         - backgroud
+                         - housing_needs
+                         - other_requirements
+                         - creator
+                        properties:
+                         id:
+                           type: string
+                           default: idddddd
+                         heading:
+                           type :  string
+                           default : some heading
+                         name:
+                           type: string
+                           default: name
+                         background:
+                           type: string
+                           default: background
+                         housing_needs:
+                           type: string
+                           default: housing needs
+                         other_requirements:
+                           type: string
+                           default: other requirements
+                         creator:
+                           type: string
+                           default : userid comes here
+           400:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: No such user exists
+           500:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: Something went wrong / Jwt token error
+
+# --------------------------------- POST DOCS --------------------------------
+
+    #Generate
+    /api/post/generate:
+       post:
+          tags:
+          - Post Controllers
+          summary: Generate post based upon input
+          requestBody:
+           required: true
+           content:
+             application/json:
+                  schema:
+                   type: object
+                   required:
+                    - personas
+                    - tone
+                   properties:   
+                     persona:         
+                       type: object
+                       required:
+                         - heading
+                         - name
+                         - backgroud
+                         - housing_needs
+                         - other_requirements
+                       properties:
+                         heading:
+                           type :  string
+                           default : some heading
+                         name:
+                           type: string
+                           default: name
+                         background:
+                           type: string
+                           default: background
+                         housing_needs:
+                           type: string
+                           default: housing needs
+                         other_requirements:
+                           type: string
+                           default: other requirements
+                     tone:
+                         type: array
+                         example: [conversational ,casual]           
+          responses:
+           201:
+             content:
+               application/json:
+                  schema:
+                   type: object
+                   required:
+                    - post
+                    - generatedImages
+                   properties:   
+                     post:         
+                       type: object
+                       required:
+                         - heading
+                         - description
+                         - creator
+                         - generatedImages
+                       properties:
+                         heading:
+                           type :  string
+                           default : some heading
+                         description:
+                           type: string
+                           default: some description
+                         creator:
+                           type: string
+                           default: user's id
+                     generatedImages:   
+                       type: array
+                       example: [url1 , url2 , url3]      
+           400:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: No such user exists / custom feild validation error
+           500:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: Something went wrong (sometimes appended with generating data)
+
+    #Edit 
+    /api/post/edit/{postid}:
+       patch:
+          parameters:
+            - in: path
+              name: postid
+              required: true
+              type: string
+              minimum: 1
+              description: id of post to edit
+          tags:
+          - Post Controllers
+          summary: Edit post based upon input
+          requestBody:
+           required: true
+           content:
+             application/json:
+                  schema:
+                    type: object
+                    required:
+                         - heading
+                         - description
+                    properties:
+                         heading:
+                           type :  string
+                           default : some heading
+                         description:
+                           type: string
+                           default: description 
+          responses:
+           201:
+             content:
+               application/json:
+                  schema:    
+                       type: object
+                       required:
+                         - heading
+                         - description
+                         - creator
+                         - message
+                       properties:
+                         heading:
+                           type :  string
+                           default : some heading
+                         description:
+                           type: string
+                           default: some description
+                         creator:
+                           type: string
+                           default: user's id
+                         message:
+                           type: string
+                           default: Post updated successfully!
+           400:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: No such user exists / custom feild validation error
+           403:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: unauthorzied user access
+           500:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: Something went wrong (sometimes appended with generating data)
+
+    #Confirm Post
+    /api/post/confirm/{uid}:
+       post:
+          parameters:
+            - in: path
+              name: uid
+              required: true
+              default: userid
+              type: string
+              minimum: 1
+              description: id of user 
+          tags:
+          - Post Controllers
+          summary: Confirm saving post in database
+          description: Only one type of images should be passed from client between generatedImages(unsplash images) and images(system uploaded file) 
+          requestBody:
+           required: true
+           description:  Only one type of images should be passed from client between generatedImages(unsplash images) and images(system uploaded file). Both are arrays , generatedImages array sent from client looks like ["url1" , "url2"] . When sending generatedImages only then unsplashDownloadLinks array should be sent 
+           content:
+             multipart/form-data:
+                  schema:
+                   type: object
+                   required:
+                    - heading
+                    - description
+                   properties:
+                      heading:
+                         type :  string
+                         default : some heading 
+                      description:
+                         type: string
+                         default: description of post     
+                      images:
+                          type: array
+                          items:
+                            type: string
+                            default : image1
+                            format: binary
+                      generatedImages[0]:
+                            type: string
+                            default: https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTA0MTR8MHwxfHNlYXJjaHwxfHxob21lYnV5ZXIlMkNyZWFsJTIwZXN0YXRlJTIwbWFya2V0JTJDc3BhY2lvdXMlMjBob3VzZXxlbnwwfHx8fDE2OTY1MDc0Njl8MA&ixlib=rb-4.0.3&q=80&w=1080
+                      generatedImages[1]:
+                            type: string
+                            default: https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTA0MTR8MHwxfHNlYXJjaHwxfHxob21lYnV5ZXIlMkNyZWFsJTIwZXN0YXRlJTIwbWFya2V0JTJDc3BhY2lvdXMlMjBob3VzZXxlbnwwfHx8fDE2OTY1MDc0Njl8MA&ixlib=rb-4.0.3&q=80&w=1080
+                      generatedImages[2]:
+                            type: string
+                            default: https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MTA0MTR8MHwxfHNlYXJjaHwxfHxob21lYnV5ZXIlMkNyZWFsJTIwZXN0YXRlJTIwbWFya2V0JTJDc3BhY2lvdXMlMjBob3VzZXxlbnwwfHx8fDE2OTY1MDc0Njl8MA&ixlib=rb-4.0.3&q=80&w=1080
+          responses:
+           201:
+             content:
+               application/json:
+                  schema:
+                   type: object
+                   required:
+                    - message
+                   properties:   
+                     message:         
+                       type: object
+                       default : Post created!
+           400:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: No such user exists / custom feild validation error
+           403:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: unauthorzied user access
+           500:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: Something went wrong / jwt error 
+
+    # Get user' posts
+    /api/post:
+       get:
+          tags:
+          - Post Controllers
+          summary: Get all posts related to logged in user
+          description: number of user posts will be returned
+          responses:
+           200:
+             content:
+               application/json:
+                  schema:
+                   type: object
+                   required:
+                    - posts
+                   properties:   
+                     posts:         
+                       type: array
+                       items:
+                        type: object
+                        required:
+                         - id
+                         - heading
+                         - description
+                         - creator
+                         - images
+                        properties:
+                         id:
+                           type: string
+                           default: idddddd
+                         heading:
+                           type :  string
+                           default : some heading
+                         description:
+                           type: string
+                           default: name
+                         creator:
+                           type: string
+                           default : userid comes here
+                         images:
+                           type: array
+                           items:
+                            type: string
+                            default: image1 url
+           400:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: No such user exists / custom field validation error
+           500:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: Something went wrong / Jwt token error
+     
+    # Delete post 
+    /api/post/{postid}:
+     delete:
+        parameters:
+          - in: path
+            name: postid
+            required: true
+            type: string
+            minimum: 1
+            description: id of post
+        tags:
+        - Post Controllers
+        summary: Delete the post from database   
+        responses:
+         201:
+           content:
+             application/json:
+                schema:
+                 type: object
+                 required:
+                  - message
+                 properties:   
+                   message:         
+                     type: object
+                     default : Post delete successfully!
+         400:
+             description:
+             content:
+                 application/json:
+                   schema:
+                      type: object
+                      required:
+                        - message
+                      properties:
+                        message:
+                          type: string
+                          default: No such post exists / no such user exists
+         403:
+             description:
+             content:
+                 application/json:
+                   schema:
+                      type: object
+                      required:
+                        - message
+                      properties:
+                        message:
+                          type: string
+                          default: unauthorzied user access
+         500:
+             description:
+             content:
+                 application/json:
+                   schema:
+                      type: object
+                      required:
+                        - message
+                      properties:
+                        message:
+                          type: string
+                          default: Something went wrong / jwt error 
+     
+    #Set reminder
+    /api/post/reminder/set:
+     post:
+       tags:
+       - Post Controllers
+       summary : Set a reminder for frequency of notifications (daily , weekly , twice-a-week)
+       requestBody:
+         required: true
+         content:
+           application/json:
+             schema:
+               type: object
+               required: 
+                - reminder_type
+                - device_token
+               properties:
+                 reminder_type:
+                   type: string
+                   default: twice-a-week
+                 device_token:
+                   type: string
+                   default: device push token fcm
+       responses:
+           201:
+              application/json:
+                  schema:
+                   type: object
+                   required:
+                    - message
+                   properties:   
+                    message:        
+                     type: string
+                     default: reminder set to twice-a-week
+           400:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: No such user exists / no such posts/  validation error
+           500:
+               description:
+               content:
+                   application/json:
+                     schema:
+                        type: object
+                        required:
+                          - message
+                        properties:
+                          message:
+                            type: string
+                            default: Something went wrong
+     
+
+
